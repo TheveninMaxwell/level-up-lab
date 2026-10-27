@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Level Up Lab — 60 Days Challenge</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--bd:#e5e7eb;--tx:#0f172a;--mu:#64748b;--ac:#1e3a8a;--ac2:#dbe4ff;--ok:#16a34a;--wa:#f59e0b;--ne:#e5e7eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1120;--card:#111a2e;--bd:#22304d;--tx:#e8edf7;--mu:#94a3b8;--ac:#7c9cff;--ac2:#1b2a52;--ne:#25314d}}
+:root[data-theme="dark"]{--bg:#0b1120;--card:#111a2e;--bd:#22304d;--tx:#e8edf7;--mu:#94a3b8;--ac:#7c9cff;--ac2:#1b2a52;--ne:#25314d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.app{display:flex;min-height:100vh}
+aside{width:230px;padding:20px 14px;border-right:1px solid var(--bd);background:var(--card);position:sticky;top:0;height:100vh;flex-shrink:0}
+.logo{font-weight:700;font-size:17px;color:var(--ac)}.sub{font-size:12px;color:var(--mu);margin-bottom:20px}
+.nb{display:block;width:100%;text-align:left;border:0;background:none;color:var(--mu);padding:9px 12px;border-radius:8px;font:inherit;cursor:pointer;margin-bottom:2px}
+.nb.on,.nb:hover{background:var(--ac2);color:var(--ac);font-weight:600}
+main{flex:1;min-width:0;padding:24px;max-width:1100px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+h1{font-size:22px;margin:0}h2{font-size:16px;margin:0 0 10px}h3{font-size:15px;margin:0}
+.mu{color:var(--mu);font-size:13px}.big{font-size:24px;font-weight:700}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--ac2);color:var(--ac);font-size:12px;font-weight:600}
+.btn{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
+.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}:root[data-theme="dark"] .btn.p{color:#0b1120}
+.btn.d{color:#dc2626;border-color:#dc2626}
+input,textarea,select{width:100%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:8px;padding:8px 10px;font:inherit}
+textarea{resize:vertical;min-height:60px}label{font-size:13px;color:var(--mu);display:block;margin:10px 0 4px}
+.bar{height:8px;background:var(--ne);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
+.hm{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.cell{aspect-ratio:1;border-radius:6px;background:var(--ne);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mu);border:0;cursor:pointer}
+.cell.f{background:var(--ac);color:#fff}.cell.h{background:var(--wa);color:#fff}.cell.t{outline:2px solid var(--ac);outline-offset:1px}
+.chk{display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:600}.chk input{width:18px;height:18px}
+.modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:20px;z-index:50}
+.modal.on{display:flex}.mb{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;max-width:640px;width:100%}
+table{border-collapse:collapse;font-size:12px;width:100%}td,th{border:1px solid var(--bd);padding:4px 6px;text-align:left}
+.wrap{overflow-x:auto}.dr{padding:12px;border-bottom:1px solid var(--bd)}
+nav.mob{display:none}
+@media(max-width:760px){aside{display:none}main{padding:14px 14px 80px}nav.mob{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:20}nav.mob .nb{text-align:center;font-size:12px;padding:8px 2px;margin:0}}
+</style></head><body>
+<div class="app"><aside><div class="logo">Level Up Lab</div><div class="sub">60 Days to Build Better Skills</div><div id="nav"></div></aside>
+<main id="m"></main></div><nav class="mob" id="mn"></nav>
+<div class="modal" id="md"><div class="mb" id="mbx"></div></div>
+<script>
+const EX=("Mengenal interface: ribbon, worksheet, cell, row, column|Input, edit, dan hapus data|Navigasi cepat: Name Box, Ctrl+Arrow, pilih range|Copy-paste, autofill, fill handle|Format angka, tanggal, teks, persen, mata uang|Lebar kolom/baris, wrap text, alignment, border|Mengurutkan data dengan benar|Filter dengan beberapa kriteria|Freeze Panes|Mengubah dataset menjadi Table|COUNT dan COUNTA|COUNTIF|SUMIF|IF|IFERROR|XLOOKUP dasar|XLOOKUP exact match|Membersihkan spasi, format, dan nilai kosong|PivotTable sederhana|Chart dari PivotTable dan review|Mengenal database, tabel, kolom, baris|SELECT|WHERE|AND dan OR|ORDER BY|LIMIT dan DISTINCT|COUNT, SUM, AVG|GROUP BY|HAVING|JOIN dasar|Latihan JOIN dua tabel|NULL dan data hilang|Menemukan dan menangani duplikat|Latihan filter, sort, agregasi|Jawab 5 pertanyaan bisnis dengan SQL|Review SQL dan perbaiki query|Pilih dataset dan pertanyaan bisnis|Pahami kolom dan kualitas data|Bersihkan dataset|Ringkasan dengan formula dan PivotTable|Menulis prompt yang jelas untuk Excel/SQL|Minta AI menjelaskan formula/query|Minta AI memberi contoh formula/query|Periksa hasil AI dengan data sumber|Bandingkan hasil manual vs AI|Identifikasi asumsi dan keterbatasan|Ringkasan data dengan AI lalu verifikasi|Review penggunaan AI secara kritis|Tentukan dataset dan pertanyaan bisnis utama|Periksa struktur kolom dan kualitas data|Bersihkan data dan dokumentasikan perubahan|SUMIF/COUNTIF sesuai pertanyaan|XLOOKUP jika diperlukan|PivotTable dan chart utama|Tulis pertanyaan SQL yang relevan|Jalankan query dan periksa hasil|Gunakan AI untuk cek logika analisis|Temukan 3 insight berbasis data|Ringkasan satu halaman dan rekomendasi|Presentasi mini project dan cerita untuk wawancara kerja").split("|");
+const IE=("Menangkap ide utama audio|Angka, tanggal, jam, harga|Mengeja nama, alamat, tempat|Singular/plural dan word limits|Form completion dan instruksi soal|Keywords dan distractors|Review Listening Section 1|Section 2: monolog dan fasilitas|Soal peta dan arah|Multiple choice dan paraphrase|Menangkap detail penting|Timed Listening Section 1|Timed Listening Section 2|Evaluasi skor dan kesalahan umum|Skimming untuk gambaran umum|Scanning informasi spesifik|Menentukan main idea paragraf|True/False/Not Given|Yes/No/Not Given|Matching headings|Matching information|Sentence completion|Summary completion|Multiple choice Reading|Sinonim dan paraphrase|Mengatur waktu per passage|Satu passage dengan timer|Evaluasi kesalahan Reading|Struktur kalimat dan grammar dasar|Variasi jenis kalimat|Subject-verb agreement dan tenses|Topic sentence dan supporting ideas|Linking words natural|Task 1: grafik/tabel dan overview|Task 1: bandingkan angka dan tren|Task 1: laporan singkat dengan timer|Task 2: memahami prompt|Task 2: introduction dan thesis|Task 2: body paragraph dengan contoh|Task 2: conclusion|Cek grammar, coherence, repetisi|Tulis satu essay dengan timer dan evaluasi|Part 1: perkenalan, pekerjaan, tempat tinggal|Rutinitas, hobi, akhir pekan|Menjawab dengan alasan dan contoh|Pronunciation dan word stress|Part 2: memahami cue card|Catatan selama satu menit|Bicara 1–2 menit dan rekam suara|Evaluasi rekaman|Part 3: opini dan alasan|Perbandingan, prediksi, spekulasi|Kurangi filler, tingkatkan fluency|Mock test Part 1|Mock test Part 2|Mock test Part 3 dan evaluasi|Mini mock test Listening|Mini mock test Reading|Latihan Writing Task 1 atau 2|Speaking mock, evaluasi semua skill, fokus berikutnya").split("|");
+const PE=[[1,10,"Excel Foundations","x"],[11,20,"Formulas & Reporting","x"],[21,36,"SQL Fundamentals","s"],[37,40,"Mini Project","p"],[41,48,"AI-Assisted Data Work","a"],[49,60,"Business Data Project","p"]];
+const PI=[[1,14,"Listening","L"],[15,28,"Reading","R"],[29,42,"Writing","W"],[43,56,"Speaking","S"],[57,60,"Final Review","F"]];
+const ST={x:["Buka Excel/Google Sheets dan salin dataset latihan di bawah ke sheet kosong.","Pelajari topik hari ini (2–3 menit) lewat menu Help atau video singkat.","Praktikkan langsung pada dataset selama 8 menit.","Ulangi sekali tanpa panduan, lalu catat 1 hal yang dipelajari."],
+s:["Buka SQL playground gratis (mis. SQLite Online / DB Fiddle) dan buat tabel dari dataset di bawah.","Tulis 2–3 query terkait topik hari ini.","Jalankan dan cocokkan hasil dengan data asli.","Simpan query terbaik di catatan."],
+p:["Tentukan target kecil untuk sesi ini dari proyek Anda.","Kerjakan langkah hari ini pada dataset pilihan.","Dokumentasikan perubahan/temuan dalam 2–3 kalimat.","Tulis langkah berikutnya untuk besok."],
+a:["Siapkan tugas kecil dan data contoh (tanpa data sensitif).","Tulis prompt yang jelas sesuai topik hari ini ke asisten AI.","Verifikasi jawaban AI dengan data sumber.","Catat apa yang benar dan apa yang perlu diperbaiki."],
+L:["Siapkan audio latihan dari sumber pilihan Anda dan tempel tautannya di bawah.","Dengarkan dan kerjakan dengan fokus pada topik hari ini.","Cek jawaban dan tulis kesalahan di kolom bawah.","Catat vocabulary baru."],
+R:["Siapkan teks/passage latihan dari sumber pilihan dan tempel tautannya.","Kerjakan dengan fokus pada teknik hari ini.","Cek jawaban dan analisis mengapa salah.","Catat vocabulary baru."],
+W:["Baca topik/prompt latihan (tempel sumbernya di bawah).","Tulis jawaban atau bagian tulisan sesuai fokus hari ini.","Periksa ulang grammar, linking, dan repetisi.","Catat 1 kesalahan yang paling sering."],
+S:["Siapkan pertanyaan/cue card dari sumber pilihan.","Jawab dengan suara keras, rekam di ponsel.","Dengarkan ulang: nilai fluency dan pronunciation.","Catat ekspresi baru yang ingin dipakai."],
+F:["Siapkan materi mini test dan timer.","Kerjakan sesuai batas waktu.","Hitung skor dan tulis kesalahan.","Tentukan fokus belajar berikutnya."]};
+const DS=[["Tanggal","Produk","Wilayah","Qty","Harga"],["2026-01-03","Laptop","Jakarta","2","12000000"],["2026-01-05","Mouse","Bandung","10","150000"],["2026-01-07","Laptop","Surabaya","1","12000000"],["2026-01-09","Monitor","Jakarta","3","2500000"],["2026-01-09","Mouse","Jakarta","5","150000"],["2026-01-12","Monitor","","2","2500000"]];
+const MOT=["Consistency beats intensity. Selesaikan 30 menit hari ini.","Satu langkah kecil setiap hari lebih kuat dari sesi maraton sesekali.","Hari yang terlewat bukan akhir. Lanjutkan dari hari ini.","Fokus pada proses: 15 menit Excel, 15 menit IELTS."];
+const $=s=>document.querySelector(s),h=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const pd=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+let S=(()=>{try{const r=JSON.parse(localStorage.getItem("llab"));if(r&&r.t)return r}catch(e){}return{name:"",start:iso(new Date()),target:30,theme:"auto",t:{}}})();
+const save=()=>{try{localStorage.setItem("llab",JSON.stringify(S))}catch(e){}};
+const ph=(P,d)=>P.find(p=>d>=p[0]&&d<=p[1]);
+const T=(d,k)=>{const p=ph(k=="e"?PE:PI,d);return{title:(k=="e"?EX:IE)[d-1],phase:p[2],steps:ST[p[3]],kind:p[3]}};
+const g=(d,k)=>S.t[d+k]||(S.t[d+k]={});
+const done=(d,k)=>!!(S.t[d+k]&&S.t[d+k].done);
+const cnt=d=>(done(d,"e")?1:0)+(done(d,"i")?1:0);
+const days=[...Array(60)].map((_,i)=>i+1);
+const tIdx=()=>Math.round((pd(iso(new Date()))-pd(S.start))/864e5)+1;
+function streaks(){let best=0,r=0;days.forEach(d=>{r=cnt(d)==2?r+1:0;best=Math.max(best,r)});let i=Math.min(tIdx(),60),c=0;if(i>=1){if(cnt(i)<2)i--;while(i>=1&&cnt(i)==2){c++;i--}}return{cur:c,best}}
+function stats(){const e=days.filter(d=>done(d,"e")).length,i=days.filter(d=>done(d,"i")).length,full=days.filter(d=>cnt(d)==2).length,any=days.filter(d=>cnt(d)>0).length;return{e,i,full,any,tasks:e+i,pct:Math.round((e+i)/1.2),min:(e+i)*S.target/2,...streaks()}}
+let V="dash",R={ph:"",st:"all",q:""};
+const NAV=[["dash","Dashboard"],["road","Roadmap"],["habit","Habit"],["set","Settings"]];
+function theme(){const r=document.documentElement;S.theme=="auto"?r.removeAttribute("data-theme"):r.setAttribute("data-theme",S.theme)}
+function go(v){V=v;render()}
+function render(){theme();const b=NAV.map(n=>`<button class="nb ${V==n[0]?"on":""}" onclick="go('${n[0]}')">${n[1]}</button>`).join("");$("#nav").innerHTML=b;$("#mn").innerHTML=b;({dash,road,habit,set}[V])();scrollTo(0,0)}
+function dstat(d){const c=cnt(d);return c==2?"Completed":c==1?"In Progress":"Not Started"}
+function card(d,k){const t=T(d,k),x=g(d,k),lab=k=="e"?"Excel / Data Skills":"IELTS";return`<div class="card"><div class="row sp"><span class="pill">${lab}</span><span class="mu">15 menit</span></div><h3 style="margin-top:8px">${h(t.title)}</h3><div class="mu">${t.phase} · Hari ${d}. ${h(t.steps[1])}</div>
+<label class="chk" style="margin:12px 0"><input type="checkbox" ${x.done?"checked":""} onchange="tog(${d},'${k}')">${x.done?"Selesai":"Belum selesai"}</label>
+<div class="row"><button class="btn p" onclick="learn(${d},'${k}')">Start Learning</button><button class="btn" onclick="tog(${d},'${k}',true)">${x.done?"Batalkan":"Mark as Complete"}</button></div>
+<textarea placeholder="Catatan singkat…" style="margin-top:10px" oninput="note(${d},'${k}',this.value)">${h(x.note||"")}</textarea></div>`}
+function tog(d,k,f){const x=g(d,k);x.done=!x.done;if(x.done)x.at=iso(new Date());save();render();if($("#md").classList.contains("on"))learn(d,k)}
+function note(d,k,v){g(d,k).note=v;save()}
+function fld(d,k,f,v){g(d,k)[f]=v;save()}
+function dash(){const s=stats(),i=Math.min(Math.max(tIdx(),1),60),started=tIdx()>=1,ps=s.tasks==0?"Not Started":s.full==60?"Completed":"In Progress",nm=S.name?", "+h(S.name):"";
+const st=[["Total hari",60],["Hari selesai",s.full],["Progres",s.pct+"%"],["Tugas selesai",s.tasks+"/120"],["Current streak",s.cur+" hari"],["Best streak",s.best+" hari"],["Menit belajar",s.min]].map(a=>`<div class="card"><div class="mu">${a[0]}</div><div class="big">${a[1]}</div></div>`).join("");
+const bars=days.map((d,j)=>`<rect x="${j*10}" y="${50-cnt(d)*25}" width="8" height="${Math.max(cnt(d)*25,2)}" rx="2" fill="${cnt(d)==2?"var(--ac)":cnt(d)==1?"var(--wa)":"var(--ne)"}"/>`).join("");
+const tl=(P,K)=>P.map(p=>{let n=0,tot=p[1]-p[0]+1;for(let d=p[0];d<=p[1];d++)if(done(d,K))n++;return`<div style="margin:8px 0"><div class="row sp mu"><span>${p[2]} (Hari ${p[0]}–${p[1]})</span><span>${n}/${tot}</span></div><div class="bar"><i style="width:${n/tot*100}%"></i></div></div>`}).join("");
+$("#m").innerHTML=`<div class="row sp"><div><h1>Halo${nm} 👋</h1><div class="mu">${new Date().toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})} · ${started?"Day "+i+" of 60":"Program dimulai "+pd(S.start).toLocaleDateString("id-ID")}</div></div><span class="pill">${ps}</span></div>
+<div class="card" style="margin:14px 0;background:var(--ac2)">${MOT[i%MOT.length]}</div>
+<div class="grid g4">${st}</div><h2 style="margin:18px 0 8px">Today’s Focus — Hari ${i}</h2><div class="grid g2">${card(i,"e")}${card(i,"i")}</div>
+<h2 style="margin:18px 0 8px">Progress Overview</h2><div class="card"><div class="mu">Progres harian (biru: 2 tugas, kuning: 1 tugas)</div><svg viewBox="0 0 600 52" style="width:100%;margin-top:8px">${bars}</svg></div>
+<div class="grid g2" style="margin-top:12px"><div class="card"><h3>Excel / Data Skills — ${Math.round(s.e/.6)}%</h3>${tl(PE,"e")}</div><div class="card"><h3>IELTS — ${Math.round(s.i/.6)}%</h3>${tl(PI,"i")}</div></div>`}
+function road(){const opts=[...PE,...PI].map(p=>`<option ${R.ph==p[2]?"selected":""}>${p[2]}</option>`).join("");
+$("#m").innerHTML=`<h1>Roadmap 60 Hari</h1><div class="grid g4" style="margin:14px 0"><select onchange="R.ph=this.value;list()"><option value="">Semua fase</option>${opts}</select><select onchange="R.st=this.value;list()">${["all","Not Started","In Progress","Completed"].map(x=>`<option value="${x}" ${R.st==x?"selected":""}>${x=="all"?"All":x}</option>`).join("")}</select><input placeholder="Cari topik…" value="${h(R.q)}" oninput="R.q=this.value;list()"></div><div class="card" style="padding:0" id="rl"></div>`;list()}
+function list(){const q=R.q.toLowerCase(),st=S.start;const r=days.filter(d=>{const e=T(d,"e"),i=T(d,"i");return(!R.ph||e.phase==R.ph||i.phase==R.ph)&&(R.st=="all"||dstat(d)==R.st)&&(!q||(e.title+i.title).toLowerCase().includes(q))});
+$("#rl").innerHTML=r.map(d=>{const dt=new Date(pd(st).getTime()+(d-1)*864e5).toLocaleDateString("id-ID",{day:"numeric",month:"short"});return`<div class="dr"><div class="row sp"><b>Hari ${d} <span class="mu">· ${dt}</span></b><span class="pill">${dstat(d)}</span></div>${["e","i"].map(k=>{const t=T(d,k);return`<div class="row" style="margin-top:6px"><input type="checkbox" style="width:18px" ${done(d,k)?"checked":""} onchange="tog(${d},'${k}');list()"><span style="flex:1;min-width:200px"><span class="mu">${k=="e"?"Excel/Data":"IELTS"} · ${t.phase}:</span> ${h(t.title)}</span><button class="btn" onclick="learn(${d},'${k}')">Buka</button></div>`}).join("")}</div>`}).join("")||`<div class="dr mu">Tidak ada hari yang cocok.</div>`}
+function habit(){const s=stats();$("#m").innerHTML=`<h1>Habit Tracker</h1><div class="grid g4" style="margin:14px 0">${[["Current streak",s.cur],["Best streak",s.best],["Hari 2 tugas selesai",s.full],["Hari ≥1 tugas",s.any]].map(a=>`<div class="card"><div class="mu">${a[0]}</div><div class="big">${a[1]}</div></div>`).join("")}</div>
+<div class="card"><div class="hm">${days.map(d=>`<button class="cell ${cnt(d)==2?"f":cnt(d)==1?"h":""} ${tIdx()==d?"t":""}" title="Hari ${d}" onclick="learn(${d},'${done(d,"e")?"i":"e"}')">${d}</button>`).join("")}</div><div class="mu" style="margin-top:10px">Biru: 2 tugas selesai · Kuning: 1 tugas · Abu-abu: belum. Streak dihitung dari hari kalender lokal berdasarkan tanggal mulai, bukan dari refresh.</div></div>`}
+function learn(d,k){const t=T(d,k),x=g(d,k),ie=k=="i",ds=!ie&&t.kind!="p"||t.kind=="p"&&!ie;
+$("#mbx").innerHTML=`<div class="row sp"><span class="pill">${ie?"IELTS":"Excel / Data"} · Hari ${d}</span><span class="mu">Target 15 menit</span></div><h2 style="font-size:19px;margin:10px 0 4px">${h(t.title)}</h2><div class="mu">Tujuan: memahami dan mempraktikkan “${h(t.title)}” (${t.phase}).</div>
+<h3 style="margin:14px 0 6px">Langkah</h3><ol style="margin:0;padding-left:20px">${t.steps.map(a=>`<li>${h(a)}</li>`).join("")}</ol>
+${ds?`<h3 style="margin:14px 0 6px">Dataset latihan (salin ke sheet/tabel “penjualan”)</h3><div class="wrap"><table>${DS.map((r,i)=>`<tr>${r.map(c=>i?`<td>${h(c)||"<i>kosong</i>"}</td>`:`<th>${c}</th>`).join("")}</tr>`).join("")}</table></div>`:""}
+${ie?`<label>Tautan sumber latihan (audio/teks/soal yang Anda gunakan)</label><input value="${h(x.link||"")}" oninput="fld(${d},'${k}','link',this.value)"><div class="grid g2" style="gap:8px"><div><label>Skor / jawaban benar</label><input value="${h(x.score||"")}" oninput="fld(${d},'${k}','score',this.value)"></div><div><label>Vocabulary baru</label><input value="${h(x.vocab||"")}" oninput="fld(${d},'${k}','vocab',this.value)"></div></div><label>Kesalahan yang perlu diperbaiki</label><textarea oninput="fld(${d},'${k}','err',this.value)">${h(x.err||"")}</textarea>`:""}
+<label>Catatan pribadi</label><textarea oninput="note(${d},'${k}',this.value)">${h(x.note||"")}</textarea>
+<div class="row" style="margin-top:14px"><button class="btn p" onclick="tog(${d},'${k}')">${x.done?"Batalkan selesai":"Tandai selesai"}</button><button class="btn" onclick="closeM()">Kembali</button></div>`;$("#md").classList.add("on")}
+function closeM(){$("#md").classList.remove("on");render()}
+$("#md").addEventListener("click",e=>{if(e.target.id=="md")closeM()});
+function set(){$("#m").innerHTML=`<h1>Settings</h1><div class="card" style="margin-top:14px;max-width:560px"><label>Nama tampilan</label><input value="${h(S.name)}" oninput="S.name=this.value;save()"><label>Tanggal mulai program</label><input type="date" value="${S.start}" onchange="if(this.value){S.start=this.value;save()}"><label>Target waktu harian (menit)</label><input type="number" min="10" max="240" value="${S.target}" onchange="S.target=Math.max(10,+this.value||30);save()"><label>Tema</label><select onchange="S.theme=this.value;save();theme()">${[["auto","Ikuti sistem"],["light","Terang"],["dark","Gelap"]].map(a=>`<option value="${a[0]}" ${S.theme==a[0]?"selected":""}>${a[1]}</option>`).join("")}</select>
+<div class="row" style="margin-top:16px"><button class="btn p" onclick="exp()">Export backup JSON</button><button class="btn" onclick="$('#imp').click()">Import backup JSON</button><button class="btn d" onclick="rst()">Reset progres</button></div><input type="file" id="imp" accept=".json,application/json" hidden onchange="imp(this)">
+<p class="mu">Data tersimpan di browser/perangkat ini (localStorage). Lakukan export backup sebelum mengganti perangkat atau browser.</p></div>`}
+function exp(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({app:"level-up-lab",...S},null,1)],{type:"application/json"}));a.download="level-up-lab-backup-"+iso(new Date())+".json";a.click()}
+function imp(el){const f=el.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||typeof o.t!="object"||!/^\d{4}-\d\d-\d\d$/.test(o.start)||typeof o.name!="string"||!(o.target>0))throw 1;for(const k in o.t){const m=/^(\d+)[ei]$/.exec(k);if(!m||m[1]<1||m[1]>60||typeof o.t[k]!="object")throw 1}if(!confirm("Backup valid. Ganti progres saat ini?"))return;S={name:o.name,start:o.start,target:+o.target,theme:["auto","light","dark"].includes(o.theme)?o.theme:"auto",t:o.t};save();render()}catch(e){alert("File backup tidak valid. Progres Anda tidak diubah.")}el.value=""};r.readAsText(f)}
+function rst(){if(confirm("Hapus semua progres dan catatan? Tindakan ini tidak bisa dibatalkan.")){S={name:S.name,start:iso(new Date()),target:S.target,theme:S.theme,t:{}};save();render()}}
+save();render();
+</script></body></html>
